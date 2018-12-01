@@ -21,13 +21,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity implements MessegesRecycleViewAdapter.MessageAdded {
 
     EditText messegeEditText;
     Button sendButton;
     DatabaseReference databaseMesseges;
     FirebaseAuth auth;
     FirebaseUser user;
+    RecyclerView chatRecycleView;
     MessegesRecycleViewAdapter messegesRecycleViewAdapter;
 
     @Override
@@ -43,8 +44,8 @@ public class ChatActivity extends AppCompatActivity {
         user = auth.getCurrentUser();
 
         List<Message> messages = new ArrayList<>();
-        messegesRecycleViewAdapter = new MessegesRecycleViewAdapter(messages, user);
-        RecyclerView chatRecycleView = findViewById(R.id.chat_rv);
+        messegesRecycleViewAdapter = new MessegesRecycleViewAdapter(messages, user, this);
+        chatRecycleView = findViewById(R.id.chat_rv);
         chatRecycleView.setAdapter(messegesRecycleViewAdapter);
         chatRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -102,5 +103,10 @@ public class ChatActivity extends AppCompatActivity {
             databaseMesseges.child(id).setValue(newMessage);
             messegeEditText.setText("");
         }
+    }
+
+    @Override
+    public void onMessageAdded(int position) {
+        chatRecycleView.getLayoutManager().scrollToPosition(position);
     }
 }

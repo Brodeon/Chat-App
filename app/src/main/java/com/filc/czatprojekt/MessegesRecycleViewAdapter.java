@@ -15,10 +15,16 @@ public class MessegesRecycleViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
     private List<Message> messeges;
     private FirebaseUser user;
+    private MessageAdded listener;
 
-    public MessegesRecycleViewAdapter(List<Message> messeges, FirebaseUser user) {
+    interface MessageAdded {
+        void onMessageAdded(int position);
+    }
+
+    public MessegesRecycleViewAdapter(List<Message> messeges, FirebaseUser user, MessageAdded messageAdded) {
         this.messeges = messeges;
         this.user = user;
+        this.listener = messageAdded;
     }
 
     @NonNull
@@ -62,14 +68,14 @@ public class MessegesRecycleViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
                 message1ViewHolder.message.setText(message.getMessageText());
                 message1ViewHolder.date.setText(TimestampConverter.convertTimeStamp(message.getTimestamp()));
-                message1ViewHolder.email.setText(user.getEmail());
+                message1ViewHolder.email.setText(getUsername(message.getMessageUser()));
                 break;
             case 2:
                 Message2ViewHolder message2ViewHolder = (Message2ViewHolder) viewHolder;
 
                 message2ViewHolder.message.setText(message.getMessageText());
                 message2ViewHolder.date.setText(TimestampConverter.convertTimeStamp(message.getTimestamp()));
-                message2ViewHolder.email.setText(message.getMessageUser());
+                message2ViewHolder.email.setText(getUsername(message.getMessageUser()));
                 break;
         }
     }
@@ -77,6 +83,7 @@ public class MessegesRecycleViewAdapter extends RecyclerView.Adapter<RecyclerVie
     public void addMessage(Message message) {
         messeges.add(message);
         notifyDataSetChanged();
+        listener.onMessageAdded(messeges.size() - 1);
     }
 
     @Override
@@ -111,6 +118,11 @@ public class MessegesRecycleViewAdapter extends RecyclerView.Adapter<RecyclerVie
             message = itemView.findViewById(R.id.another_user_message);
             date = itemView.findViewById(R.id.another_user_date);
         }
+    }
+
+    private String getUsername(String email) {
+        String[] emailArray = email.split("@");
+        return emailArray[0];
     }
 
 
