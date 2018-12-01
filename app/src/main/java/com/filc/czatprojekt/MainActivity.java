@@ -96,4 +96,9 @@ public class MainActivity extends AppCompatActivity {
         }
         return valid;
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }

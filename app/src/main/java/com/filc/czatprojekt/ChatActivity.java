@@ -1,11 +1,14 @@
 package com.filc.czatprojekt;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,6 +64,26 @@ public class ChatActivity extends AppCompatActivity implements MessegesRecycleVi
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.chat_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout_menu_button:
+                auth.signOut();
+                Intent loginIntent = new Intent(this, MainActivity.class);
+                startActivity(loginIntent);
+                return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         databaseMesseges.addChildEventListener(new ChildEventListener() {
@@ -111,5 +134,10 @@ public class ChatActivity extends AppCompatActivity implements MessegesRecycleVi
         if (layoutManager != null) {
             layoutManager.scrollToPosition(position);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }
