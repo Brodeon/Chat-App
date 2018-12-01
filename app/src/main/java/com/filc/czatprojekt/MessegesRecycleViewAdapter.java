@@ -21,7 +21,7 @@ public class MessegesRecycleViewAdapter extends RecyclerView.Adapter<RecyclerVie
         void onMessageAdded(int position);
     }
 
-    public MessegesRecycleViewAdapter(List<Message> messeges, FirebaseUser user, MessageAdded messageAdded) {
+    MessegesRecycleViewAdapter(List<Message> messeges, FirebaseUser user, MessageAdded messageAdded) {
         this.messeges = messeges;
         this.user = user;
         this.listener = messageAdded;
@@ -80,7 +80,7 @@ public class MessegesRecycleViewAdapter extends RecyclerView.Adapter<RecyclerVie
         }
     }
 
-    public void addMessage(Message message) {
+    void addMessage(Message message) {
         messeges.add(message);
         notifyDataSetChanged();
         listener.onMessageAdded(messeges.size() - 1);
@@ -97,7 +97,7 @@ public class MessegesRecycleViewAdapter extends RecyclerView.Adapter<RecyclerVie
         TextView date;
 
 
-        public Message1ViewHolder(@NonNull View itemView) {
+        Message1ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             email = itemView.findViewById(R.id.logged_user_email);
@@ -111,7 +111,7 @@ public class MessegesRecycleViewAdapter extends RecyclerView.Adapter<RecyclerVie
         TextView message;
         TextView date;
 
-        public Message2ViewHolder(@NonNull View itemView) {
+        Message2ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             email = itemView.findViewById(R.id.another_user_email);

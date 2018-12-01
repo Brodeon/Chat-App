@@ -107,6 +107,9 @@ public class ChatActivity extends AppCompatActivity implements MessegesRecycleVi
 
     @Override
     public void onMessageAdded(int position) {
-        chatRecycleView.getLayoutManager().scrollToPosition(position);
+        RecyclerView.LayoutManager layoutManager = chatRecycleView.getLayoutManager();
+        if (layoutManager != null) {
+            layoutManager.scrollToPosition(position);
+        }
     }
 }
