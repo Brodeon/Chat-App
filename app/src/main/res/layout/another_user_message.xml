@@ -33,6 +33,7 @@
                 android:layout_marginEnd="8dp"
                 android:textAlignment="center"
                 android:textColor="#146acb"
+                android:visibility="gone"
                 app:layout_constraintBaseline_toBaselineOf="@+id/another_user_email"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="12.12.2012" />

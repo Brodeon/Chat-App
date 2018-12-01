@@ -62,7 +62,7 @@ public class MessegesRecycleViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
                 message1ViewHolder.message.setText(message.getMessageText());
                 message1ViewHolder.date.setText(TimestampConverter.convertTimeStamp(message.getTimestamp()));
-                message1ViewHolder.email.setText(message.getMessageUser());
+                message1ViewHolder.email.setText(user.getEmail());
                 break;
             case 2:
                 Message2ViewHolder message2ViewHolder = (Message2ViewHolder) viewHolder;

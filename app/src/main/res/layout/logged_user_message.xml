@@ -33,6 +33,7 @@
                 android:layout_marginTop="8dp"
                 android:textAlignment="center"
                 android:textColor="#146acb"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="test test" />
@@ -62,6 +63,7 @@
                 android:text="12.12.2012"
                 android:textAlignment="center"
                 android:textColor="#146acb"
+                android:visibility="gone"
                 app:layout_constraintBaseline_toBaselineOf="@+id/logged_user_email"
                 app:layout_constraintEnd_toEndOf="parent" />
         </android.support.constraint.ConstraintLayout>
